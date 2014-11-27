@@ -778,6 +778,10 @@ int lbb_main(char **argv)
 int main(int argc UNUSED_PARAM, char **argv)
 #endif
 {
+	/* Make sure stdout is not fully buffered, we don't want to
+	 * have issues when calling busybox commands */
+	setlinebuf(stdout);
+
 	/* Tweak malloc for reduced memory consumption */
 #ifdef M_TRIM_THRESHOLD
 	/* M_TRIM_THRESHOLD is the maximum amount of freed top-most memory
