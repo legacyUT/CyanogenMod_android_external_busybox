@@ -48,8 +48,11 @@ int main(void)
 	qsort(usage_array,
 		num_messages, sizeof(usage_array[0]),
 		compare_func);
-	for (i = 0; i < num_messages; i++)
-		write(STDOUT_FILENO, usage_array[i].usage, strlen(usage_array[i].usage) + 1);
+	for (i = 0; i < num_messages; i++) {
+		if (write(STDOUT_FILENO, usage_array[i].usage, strlen(usage_array[i].usage) + 1) == -1) {
+			// error (ignored)
+		}
+	}
 
 	return 0;
 }

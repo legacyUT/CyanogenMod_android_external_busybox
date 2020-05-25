@@ -141,7 +141,9 @@ int main(int argc, char **argv)
 		line_old[0] = 0;
 		fp = fopen(argv[2], "r");
 		if (fp) {
-			fgets(line_old, sizeof(line_old), fp);
+			if (fgets(line_old, sizeof(line_old), fp) == NULL) {
+				// error (ignored)
+			}
 			fclose(fp);
 		}
 		sprintf(line_new, "#define NUM_APPLETS %u\n", NUM_APPLETS);
